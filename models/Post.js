@@ -1,6 +1,5 @@
 const { Model, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
-console.log(sequelize);
 class Post extends Model {}
 
 Post.init(

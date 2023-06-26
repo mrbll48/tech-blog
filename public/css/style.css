@@ -1,0 +1,7 @@
+.header-bar {
+    position: fixed;
+    display: flex;
+    align-content: center;
+    color: yellow;
+    padding-left: 100px;
+}

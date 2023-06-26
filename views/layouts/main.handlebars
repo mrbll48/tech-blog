@@ -5,9 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
+    <header class="header-bar">
+        <h2 class="header-bar">
+            Home
+        </h2>
+        <h2>
+            Dashboard
+        </h2>
+        {{#if logged_in}}
+        <h2>
+            Logout
+        </h2>
+        {{else}}
+        <h2>
+            Login
+        </h2>
+        {{/if}}
+    </header>
     {{{ body }}}
 </body>
 
