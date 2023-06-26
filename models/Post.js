@@ -1,34 +1,39 @@
 const { Model, DataTypes } = require("sequelize");
-
+const sequelize = require("../config/connection");
+console.log(sequelize);
 class Post extends Model {}
 
-Post.init({
-  id: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    autoIncrement: true,
-    primaryKey: true,
+Post.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    contents: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "User",
+        key: "id",
+      },
+    },
   },
-  title: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  contents: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  user_name: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  date_created: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  sequelize,
-  createdAt: true,
-  timestamps: true,
-  tableName: "Post",
-});
+  {
+    sequelize,
+    timestamps: true,
+    createdAt: true,
+    tableName: "Post",
+  }
+);
 
 module.exports = Post;
