@@ -9,19 +9,19 @@
 </head>
 
 <body>
-    <header class="header-bar">
-        <h2 class="header-bar">
+    <header class="header" id="myHeader">
+        <h2 class="headerLinks">
             Home
         </h2>
-        <h2>
+        <h2 class="headerLinks"> 
             Dashboard
         </h2>
         {{#if logged_in}}
-        <h2>
+        <h2 class="headerLinks">
             Logout
         </h2>
         {{else}}
-        <h2>
+        <h2 class="headerLinks">
             Login
         </h2>
         {{/if}}

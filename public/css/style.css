@@ -1,7 +1,26 @@
-.header-bar {
-    position: fixed;
+.header {
+    background: #555;
+    color: #f1f1f1;
     display: flex;
-    align-content: center;
-    color: black;
-    padding-left: 100px;
+    flex-direction: row;
+    align-content: space-around;
+    align-items: flex-end;
 }
+
+.headerLinks {
+    padding: 0 5px 0 5px;
+}
+/* 
+.content {
+    padding: 16px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.stick + .content {
+    padding-top: 102px;
+} */
