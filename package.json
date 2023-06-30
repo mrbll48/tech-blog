@@ -15,5 +15,18 @@
     "mysql2": "^3.4.1",
     "path": "^0.12.7",
     "sequelize": "^6.32.1"
-  }
+  },
+  "description": "## Your Task",
+  "version": "1.0.0",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrbll48/tech-blog.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrbll48/tech-blog/issues"
+  },
+  "homepage": "https://github.com/mrbll48/tech-blog#readme"
 }

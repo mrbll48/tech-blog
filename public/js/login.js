@@ -1,22 +1,25 @@
-const login = async (e) => {
+const loginForm = async (e) => {
   e.preventDefault();
-
-  const userName = document.getElementById("username-login").value.trim();
-  const password = document.getElementById("password-login").value.trim();
-
-  if (userName && password) {
-    const response = await fetch("/api/users/login", {
+  console.log("1");
+  const name = document.querySelector("#username-login").value.trim();
+  const password = document.querySelector("#password-login").value.trim();
+  console.log("2");
+  if (name && password) {
+    console.log("3");
+    const response = await fetch("/api/users", {
       method: "POST",
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ name, password }),
       headers: { "Content-Type": "application/json" },
     });
-
+    console.log("4");
     if (response.ok) {
-      document.location.replace("/homepage");
+      document.location.replace("/");
     } else {
-      alert("Error logging in");
+      alert(response.statusText);
     }
+  } else {
+    alert("You need to provide a valid username and password");
   }
 };
 
-document.getElementById("loginBtn").addEventListener("submit", login);
+document.querySelector("#login-form").addEventListener("submit", loginForm);

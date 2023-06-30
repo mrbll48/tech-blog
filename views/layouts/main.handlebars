@@ -11,18 +11,23 @@
 <body>
     <header class="header" id="myHeader">
         <h2 class="headerLinks">
+        <a href="/">
             Home
+        </a>
         </h2>
-        <h2 class="headerLinks"> 
+        <h2 class="headerLinks">
             Dashboard
         </h2>
-        {{#if logged_in}}
-        <h2 class="headerLinks">
+        {{#if loggedIn}}
+        <h2 class="headerLinks" id="logout" type="click">
             Logout
+        </a>
         </h2>
         {{else}}
         <h2 class="headerLinks">
+        <a href="/login">
             Login
+        </a>
         </h2>
         {{/if}}
     </header>
