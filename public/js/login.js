@@ -6,7 +6,7 @@ const loginForm = async (e) => {
   console.log("2");
   if (name && password) {
     console.log("3");
-    const response = await fetch("/api/users", {
+    const response = await fetch("/api/users/login", {
       method: "POST",
       body: JSON.stringify({ name, password }),
       headers: { "Content-Type": "application/json" },

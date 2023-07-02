@@ -9,29 +9,22 @@
 </head>
 
 <body>
-    <header class="header" id="myHeader">
-        <h2 class="headerLinks">
-        <a href="/">
-            Home
-        </a>
-        </h2>
-        <h2 class="headerLinks">
-            Dashboard
-        </h2>
-        {{#if loggedIn}}
-        <h2 class="headerLinks" id="logout" type="click">
-            Logout
-        </a>
-        </h2>
-        {{else}}
-        <h2 class="headerLinks">
-        <a href="/login">
-            Login
-        </a>
-        </h2>
-        {{/if}}
+    <header id="header" id="myHeader">
+        <h1 id="page-title">The Tech Blog</h1>
+        <ul id="navLinks">
+            <li class="navLinks"><a href="/">Home</a>
+            <li class="navLinks"><a href="/dashboard">Dashboard</a></li>
+            {{#if loggedIn}}
+            <li class="navLinks" id="logout" type="click"><a href="/">Logout</a></li>
+            {{else}}
+            <li class="navLinks"><a href="/login">Login</a></li>
+        </ul>
+            {{/if}}
+
     </header>
     {{{ body }}}
 </body>
-
+{{#if loggedIn}}
+<script src="/js/logout.js"></script>
+{{/if}}
 </html>

@@ -20,28 +20,30 @@ router.post("/", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  console.log("hello");
+  console.log(req.body)
   try {
-    console.log("hello2");
     const userData = await User.findOne({
       where: { name: req.body.name },
     });
-    console.log("hello3");
+    console.log(userData)
     if (!userData) {
       res.status(400).json({ message: "No user found with this username" });
       return;
     }
-    console.log("hello4");
     const validPassword = await bcrypt.compare(
       req.body.password,
       userData.password
     );
-    console.log("hello5");
+    console.log(validPassword)
     if (!validPassword) {
       res.status(400).json({ message: "Incorrect password" });
       return;
     }
-    console.log("hello6");
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.loggedIn = true;
+      res.status(200).json(userData);
+    });
   } catch (err) {
     res.status(500).json(err);
   }
