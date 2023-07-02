@@ -1,32 +1,31 @@
 const newPost = async (e) => {
-    e.preventDefault();
-    console.log("1");
-    const postTitle = document.querySelector('#post-title').value.trim();
-    const postContents = document.querySelector("#post-content").value.trim();
+  e.preventDefault();
 
-    console.log("2");
-    if (postTitle && postContents) {
-      console.log("3");
-      const response = await fetch("/api/posts/", {
-        method: "POST",
-        body: JSON.stringify({ 
-            postTitle, 
-            postContents 
-        }),
-        headers: { 
-            "Content-Type": "application/json" 
-        },
-      });
-      console.log("4");
-      if (response.ok) {
-        document.location.replace("/dashboard");
-      } else {
-        alert(response.statusText);
-      }
+  const title = document.querySelector("#post-title").value.trim();
+  const contents = document.querySelector("#post-content").value.trim();
+
+  console.log(title, contents);
+
+  if (title && contents) {
+    const response = await fetch("/api/posts/", {
+      method: "POST",
+      body: JSON.stringify({
+        title,
+        contents,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response);
+    if (response.ok) {
+      document.location.replace("/dashboard");
     } else {
-      alert("You need to provide a valid username and password");
+      alert(response.statusText);
     }
-  };
-  
-  document.querySelector("#newPostForm").addEventListener("submit", newpost);
-  
+  } else {
+    alert("You need to provide a valid username and password");
+  }
+};
+
+document.querySelector("#newPostForm").addEventListener("submit", newPost);

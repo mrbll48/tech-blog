@@ -27,6 +27,11 @@ a:link, a:visited, a:hover, a:active {
     color: #f1f1f1;
     text-decoration: none;
 }
+
+.btn {
+    background-color: #555;
+    color: #f1f1f1;
+}
 /* 
 .content {
     padding: 16px;
