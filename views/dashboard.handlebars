@@ -1,3 +1,23 @@
-<h2>Your posts</h2>
+<div>
+    <h2>Your Posts</h2>
+    <div>
+
+    <h3>
+      {{post.title}}
+    </h3>
+    <p>
+      {{post.contents}}
+    </p>
+    <p>
+      {{post.User.name}}
+    </p>
+    <p>
+      {{post.createdAt}}
+    </p>
+        {{!-- {{#each posts as |post|}}
+        {{> dashboard-posts}}
+        {{/each}} --}}
+    </div>
+</div>
 
 <button type="submit" class="btn" id="new-post-btn"><a href="/dashboard/new-post">Add Post</a></button>

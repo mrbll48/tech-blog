@@ -1,32 +1,18 @@
 const router = require("express").Router();
 const { Post, Comment, User } = require("../../models/index");
+const withAuth = require("../../utils/auth");
 
-// get post by user
-
-router.get("/:id", async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
   try {
-    const postData = await Post.findOne({
-      where: {
-        id: req.params.id,
-      },
-      attributes: [id, title, contents, created_at],
-      include: [
-        {
-          model: User,
-          attributes: "name",
-        },
-        {
-          model: Comment,
-          attributes: ["id", "comment", "user_id", "created_at"],
-          include: {
-            model: User,
-            attributes: "name",
-          },
-        },
-      ],
+    if (!req.session?.loggedIn) {
+      return res.redirect("/");
+    }
+    const postData = await Post.findAll({
+      include: [{ model: User, attributes: { exclude: ["password"] } }],
     });
     const posts = postData.map((post) => post.get({ plain: true }));
-    res.render("homepage", {
+
+    res.render("dashboard", {
       posts,
       loggedIn: req.session?.loggedIn,
     });
@@ -35,6 +21,60 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// get all posts for dashbaord
+// router.get("/dashboard", async (req, res) => {
+//   console.log("hello");
+//   try {
+//     const postData = await Post.findAll({
+//       include: [{ model: User, attributes: { exclude: ["password"] } }],
+//     });
+//     const posts = postData.map((post) => post.get({ plain: true }));
+//     res.render("dashboard", {
+//       posts: posts,
+//       loggedIn: req.session?.loggedIn,
+//     });
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// });
+
+// get one post
+router.get("/:id", async (req, res) => {
+  try {
+    const postData = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: [title, contents, created_at],
+      include: [
+        {
+          model: User,
+          attributes: ["name"],
+        },
+        {
+          model: Comment,
+          attributes: ["id", "comment", "user_id", "created_at"],
+          include: {
+            model: User,
+            attributes: ["name"],
+          },
+        },
+      ],
+    });
+
+    const posts = postData.map((post) => post.get({ plain: true }));
+    console.log(posts);
+
+    res.json("dashboard", {
+      posts,
+      loggedIn: req.session?.loggedIn,
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// create a new post
 router.post("/", async (req, res) => {
   console.log(req.body);
   try {
@@ -51,6 +91,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// update a post
 router.put("/:id", async (req, res) => {
   try {
     const postData = Post.update(
@@ -72,6 +113,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// delete a post
 router.delete("/:id", async (req, res) => {
   try {
     const postData = await Post.destroy({
