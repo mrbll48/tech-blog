@@ -2,50 +2,13 @@ const router = require("express").Router();
 const { Post, Comment, User } = require("../../models/index");
 const withAuth = require("../../utils/auth");
 
-router.get("/dashboard", withAuth, async (req, res) => {
-  try {
-    if (!req.session?.loggedIn) {
-      return res.redirect("/");
-    }
-    const postData = await Post.findAll({
-      include: [{ model: User, attributes: { exclude: ["password"] } }],
-    });
-    const posts = postData.map((post) => post.get({ plain: true }));
-
-    res.render("dashboard", {
-      posts,
-      loggedIn: req.session?.loggedIn,
-    });
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-// get all posts for dashbaord
-// router.get("/dashboard", async (req, res) => {
-//   console.log("hello");
-//   try {
-//     const postData = await Post.findAll({
-//       include: [{ model: User, attributes: { exclude: ["password"] } }],
-//     });
-//     const posts = postData.map((post) => post.get({ plain: true }));
-//     res.render("dashboard", {
-//       posts: posts,
-//       loggedIn: req.session?.loggedIn,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// get one post
-router.get("/:id", async (req, res) => {
+router.get("/:id", withAuth, async (req, res) => {
+  console.log(req.body);
   try {
     const postData = await Post.findOne({
       where: {
         id: req.params.id,
       },
-      attributes: [title, contents, created_at],
       include: [
         {
           model: User,
@@ -53,7 +16,6 @@ router.get("/:id", async (req, res) => {
         },
         {
           model: Comment,
-          attributes: ["id", "comment", "user_id", "created_at"],
           include: {
             model: User,
             attributes: ["name"],
@@ -62,21 +24,21 @@ router.get("/:id", async (req, res) => {
       ],
     });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
-    console.log(posts);
-
-    res.json("dashboard", {
-      posts,
+    const post = postData.get({ plain: true });
+    console.log(post);
+    res.render("post", {
+      ...post,
       loggedIn: req.session?.loggedIn,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });
 
 // create a new post
 router.post("/", async (req, res) => {
-  console.log(req.body);
+  console.log(req.session);
   try {
     const newPost = await Post.create({
       title: req.body.title,

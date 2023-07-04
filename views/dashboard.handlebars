@@ -1,23 +1,25 @@
 <div>
-    <h2>Your Posts</h2>
-    <div>
-
-    <h3>
-      {{post.title}}
-    </h3>
-    <p>
-      {{post.contents}}
-    </p>
-    <p>
-      {{post.User.name}}
-    </p>
-    <p>
-      {{post.createdAt}}
-    </p>
-        {{!-- {{#each posts as |post|}}
-        {{> dashboard-posts}}
-        {{/each}} --}}
-    </div>
+  <h2>Your Posts</h2>
+  {{#each posts as |post|}}
+    <a href="/dashboard/{{post.id}}">
+      <div>
+        <h3>
+          {{post.title}}
+        </h3>
+        <p>
+          {{post.contents}}
+        </p>
+        <p>
+          {{post.User.name}}
+        </p>
+        <p>
+          {{post.createdAt}}
+        </p>
+      </div>
+    </a>
+  {{/each}}
 </div>
 
-<button type="submit" class="btn" id="new-post-btn"><a href="/dashboard/new-post">Add Post</a></button>
+<button type="submit" class="btn" id="new-post-btn">
+  <a href="/dashboard/new-post">Add Post</a>
+</button>
