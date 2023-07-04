@@ -1,25 +1,26 @@
 <div>
   <h2>Your Posts</h2>
+  <button class="btn" id="new-post-btn">
+    <a href="/dashboard/new-post">Add Post</a>
+  </button>
+</div>
+<div>
   {{#each posts as |post|}}
     <a href="/dashboard/{{post.id}}">
       <div>
-        <h3>
+        <h3 class="posts">
           {{post.title}}
         </h3>
-        <p>
+        <p class="posts">
           {{post.contents}}
         </p>
-        <p>
+        <p class="posts">
           {{post.User.name}}
         </p>
-        <p>
+        <p class="posts">
           {{post.createdAt}}
         </p>
       </div>
     </a>
   {{/each}}
 </div>
-
-<button type="submit" class="btn" id="new-post-btn">
-  <a href="/dashboard/new-post">Add Post</a>
-</button>

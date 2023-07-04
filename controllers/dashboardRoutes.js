@@ -2,6 +2,11 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 const { Post, User, Comment } = require("../models");
 
+router.get("/new-post", withAuth, (req, res) => {
+  console.log("hello");
+  res.render("newPost", { loggedIn: req.session?.loggedIn });
+});
+
 router.get("/", withAuth, async (req, res) => {
   try {
     const postData = await Post.findAll({
@@ -41,7 +46,6 @@ router.get("/:id", withAuth, async (req, res) => {
         },
       ],
     });
-
     const post = postData.get({ plain: true });
     console.log(post);
     res.render("post", {
@@ -52,10 +56,6 @@ router.get("/:id", withAuth, async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-});
-
-router.get("/new-post", withAuth, (req, res) => {
-  res.render("newPost", { loggedIn: req.session?.loggedIn });
 });
 
 // router.get("/dashboard", withAuth, async (req, res) => {

@@ -10,15 +10,19 @@
 #navLinks {
     display: flex;
     width: 100%;
+    color: #f1f1f1;
+    text-decoration: none;
 }
 
 .navLinks {
     padding: 0 10px 0 10px;
     list-style: none;
     font-size: 25px;
-    color: #f1f1f1;
 }
 
+.posts{ 
+    color: black;
+}
 #page-title {
     padding-left: 50px;
 }
