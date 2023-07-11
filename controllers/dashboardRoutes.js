@@ -2,12 +2,8 @@ const router = require("express").Router();
 const withAuth = require("../utils/auth");
 const { Post, User, Comment } = require("../models");
 
-router.get("/new-post", withAuth, (req, res) => {
-  console.log("hello");
-  res.render("newPost", { loggedIn: req.session?.loggedIn });
-});
-
 router.get("/", withAuth, async (req, res) => {
+  console.log("hello");
   try {
     const postData = await Post.findAll({
       include: [{ model: User, attributes: { exclude: ["password"] } }],
@@ -26,6 +22,11 @@ router.get("/", withAuth, async (req, res) => {
   }
 });
 
+router.get("/new-post", withAuth, (req, res) => {
+  console.log("hello");
+  res.render("newPost", { loggedIn: req.session?.loggedIn });
+});
+
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
@@ -39,6 +40,7 @@ router.get("/:id", withAuth, async (req, res) => {
         },
         {
           model: Comment,
+          attributes: ["user_id"],
           include: {
             model: User,
             attributes: ["name"],
@@ -47,8 +49,7 @@ router.get("/:id", withAuth, async (req, res) => {
       ],
     });
     const post = postData.get({ plain: true });
-    console.log(post);
-    res.render("post", {
+    res.render("edit-post", {
       ...post,
       loggedIn: req.session?.loggedIn,
     });
@@ -57,21 +58,5 @@ router.get("/:id", withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// router.get("/dashboard", withAuth, async (req, res) => {
-//   try {
-//     const postData = await Post.findAll({
-//       include: [{ model: User, attributes: { exclude: ["password"] } }],
-//     });
-//     const posts = postData.map((post) => post.get({ plain: true }));
-
-//     res.render("dashboard", {
-//       posts,
-//       loggedIn: req.session?.loggedIn,
-//     });
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
 
 module.exports = router;

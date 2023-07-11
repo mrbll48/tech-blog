@@ -3,17 +3,24 @@
     <a href="/dashboard/{{post.id}}">
       <div>
         <h3 class="posts">
-          {{post.title}}
+          {{title}}
         </h3>
         <p class="posts">
-          {{post.contents}}
+          {{contents}}
         </p>
+
         <p class="posts">
-          {{post.User.name}}
+          Posted by<strong>
+            {{User.name}}</strong>
+          on
+          {{format_date createdAt}}
         </p>
-        <p class="posts">
-          {{post.createdAt}}
-        </p>
+        <p class="posts"><strong>Comments</strong>
+          {{#each Comments as |comment|}}
+            <div class="posts">{{comment.comment}}
+              -{{User}}
+              {{format_date createdAt}}</div>
+          {{/each}}</p>
       </div>
     </a>
   {{/each}}
