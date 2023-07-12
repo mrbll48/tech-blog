@@ -1,4 +1,5 @@
 <div>
+  <h2>Your Post</h2>
   <div>
     <h3>
       {{title}}
@@ -7,16 +8,13 @@
       {{contents}}
     </p>
     <p>
-      Posted by
-      {{User.name}}
-      on
-      {{format_date createdAt}}
+      {{createdAt}}
     </p>
     <p>
-
+      {{User.name}}
       <div>
         {{#each Comments as |comment|}}
-          <div>{{comment.comment}} by {{User.name}}</div>
+          <div>{{comment.comment}}</div>
         {{/each}}
       </div>
     </p>
@@ -24,6 +22,10 @@
     <input id="comment" />
     <input type="hidden" value="{{id}}" id="post_id" />
     <button class="btn" id="comment-btn">Add Comment</button>
+
+    <button class="btn" id="edit-btn"><a href="/dashboard/edit-post">Edit Post</a></button>
+
+    <button class="btn" id="delete-btn">Delete Post</button>
   </div>
 </div>
 <script src="/js/add-comment.js"></script>

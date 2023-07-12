@@ -27,6 +27,11 @@ router.get("/new-post", withAuth, (req, res) => {
   res.render("newPost", { loggedIn: req.session?.loggedIn });
 });
 
+router.get("/edit-post", withAuth, (req, res) => {
+  console.log(req.session);
+  res.render("editPost", { loggedIn: res.session?.loggedIn });
+});
+
 router.get("/:id", withAuth, async (req, res) => {
   try {
     const postData = await Post.findOne({
@@ -49,7 +54,7 @@ router.get("/:id", withAuth, async (req, res) => {
       ],
     });
     const post = postData.get({ plain: true });
-    res.render("edit-post", {
+    res.render("post", {
       ...post,
       loggedIn: req.session?.loggedIn,
     });

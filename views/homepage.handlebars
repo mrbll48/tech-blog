@@ -8,7 +8,6 @@
         <p class="posts">
           {{contents}}
         </p>
-
         <p class="posts">
           Posted by<strong>
             {{User.name}}</strong>
@@ -17,8 +16,9 @@
         </p>
         <p class="posts"><strong>Comments</strong>
           {{#each Comments as |comment|}}
-            <div class="posts">{{comment.comment}}
-              -{{User}}
+            <div class="posts">
+              {{comment.comment}}
+              {{User.name}}
               {{format_date createdAt}}</div>
           {{/each}}</p>
       </div>

@@ -2,6 +2,11 @@ const router = require("express").Router();
 const { Post, Comment, User } = require("../../models/index");
 const withAuth = require("../../utils/auth");
 
+// router.get("/edit-post", withAuth, (req, res) => {
+//   console.log("test");
+//   res.render("editPost", { loggedIn: req.session?.loggedIn });
+// });
+
 router.get("/:id", withAuth, async (req, res) => {
   console.log(req.body);
   try {

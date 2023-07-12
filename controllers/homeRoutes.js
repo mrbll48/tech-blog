@@ -6,7 +6,10 @@ router.get("/", async (req, res) => {
   try {
     const postData = await Post.findAll({
       include: [
-        { model: User, attributes: { exclude: ["password"] } },
+        {
+          model: User,
+          attributes: { exclude: ["password"] },
+        },
         { model: Comment },
       ],
     });
@@ -16,6 +19,7 @@ router.get("/", async (req, res) => {
       loggedIn: req.session?.loggedIn,
     });
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);
   }
 });

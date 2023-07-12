@@ -1,41 +1,45 @@
 #header {
-    background: #555;
-    color: #f1f1f1;
-    display: flex;
-    align-items: center;
-    flex-direction: column-reverse;
-    align-items: flex-start
+  background: #555;
+  color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  flex-direction: column-reverse;
+  align-items: flex-start;
 }
 
 #navLinks {
-    display: flex;
-    width: 100%;
-    color: #f1f1f1;
-    text-decoration: none;
+  display: flex;
+  width: 100%;
+  color: #f1f1f1;
+  text-decoration: none;
 }
 
 .navLinks {
-    padding: 0 10px 0 10px;
-    list-style: none;
-    font-size: 25px;
+  padding: 0 10px 0 10px;
+  list-style: none;
+  font-size: 25px;
 }
 
-.posts{ 
-    color: black;
+.posts {
+  color: black;
 }
 #page-title {
-    padding-left: 50px;
+  padding-left: 50px;
 }
 
-a:link, a:visited, a:hover, a:active {
-    color: #f1f1f1;
-    text-decoration: none;
+a:link,
+a:visited,
+a:hover,
+a:active {
+  color: #f1f1f1;
+  text-decoration: none;
 }
 
 .btn {
-    background-color: #555;
-    color: #f1f1f1;
+  background-color: #555;
+  color: #f1f1f1;
 }
+
 /* 
 .content {
     padding: 16px;
