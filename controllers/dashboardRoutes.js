@@ -23,7 +23,6 @@ router.get("/", withAuth, async (req, res) => {
 });
 
 router.get("/new-post", withAuth, (req, res) => {
-  console.log("hello");
   res.render("newPost", { loggedIn: req.session?.loggedIn });
 });
 

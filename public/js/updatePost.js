@@ -1,17 +1,16 @@
 const updatePost = async (e) => {
   e.preventDefault();
 
-  const title = document.getElementById("update-title").value.trim();
-  const contents = document.getElementById("update-content").value.trim();
+  const contents = document.getElementById("update-contents").value.trim();
+  const id = document.getElementById("post_id").value.trim();
+  console.log(contents, id);
 
-  console.log(title, contents);
-
-  if (title && contents) {
+  if (contents) {
     const response = await fetch(`/api/posts/${id}`, {
       method: "PUT",
       body: JSON.stringify({
-        title,
         contents,
+        id,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +18,7 @@ const updatePost = async (e) => {
     });
     console.log(response);
     if (response.ok) {
-      document.location.replace("/dashboard");
+      document.location.replace("/");
     } else {
       alert(response.statusText);
     }
@@ -28,4 +27,4 @@ const updatePost = async (e) => {
   }
 };
 
-document.getElementById("edit-post-btn").addEventListener("click", updatePost);
+document.getElementById("edit-btn").addEventListener("click", updatePost);

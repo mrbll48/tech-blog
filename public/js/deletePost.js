@@ -1,31 +1,16 @@
-const updatePost = async (e) => {
+const deletePost = async (e) => {
   e.preventDefault();
+  const id = document.getElementById("post_id").value.trim();
 
-  const title = document.getElementById("update-title").value.trim();
-  const contents = document.getElementById("update-content").value.trim();
-
-  console.log(title, contents);
-
-  if (title && contents) {
-    const response = await fetch(`/api/posts/${id}`, {
-      method: "PUT",
-      body: JSON.stringify({
-        title,
-        contents,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    console.log(response);
-    if (response.ok) {
-      document.location.replace("/dashboard");
-    } else {
-      alert(response.statusText);
-    }
+  const response = await fetch(`/api/posts/${id}`, {
+    method: "DELETE",
+  });
+  console.log(response);
+  if (response.ok) {
+    document.location.replace("/");
   } else {
-    alert("Error editing post");
+    alert(response.statusText);
   }
 };
 
-document.getElementById("edit-post-btn").addEventListener("click", updatePost);
+document.getElementById("delete-btn").addEventListener("click", deletePost);
